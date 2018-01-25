@@ -1,0 +1,67 @@
+<h1>Angular 5 : Reactive Forms | Custom Validators</h1>
+<form [formGroup]="validateForm" (ngSubmit)="register(validateForm)" novalidate>
+  <p> Is "validateForm" valid? {{(validateForm.valid?'Yes':'No')}} </p>
+
+  <div>
+    <label>Name</label>
+    <input type="text" name="name" formControlName="name">
+    <errors [control]="validateForm.controls.name"></errors>
+  </div>
+  <div>
+    <label>Email</label>
+    <input type="text" name="email" formControlName="email" >
+    <errors [control]="validateForm.controls.email"></errors>
+  </div>
+  <div>
+    <label>Mobile</label>
+    <input type="number" name="mobile" formControlName="mobile" >
+    <errors [control]="validateForm.controls.mobile"></errors>
+  </div>
+  <div>
+    <label>Age</label>
+    <input type="number" name="age" formControlName="age">
+    <errors [control]="validateForm.controls.age"></errors>
+  </div>
+  <div>
+    <label>Password</label>
+    <input type="password" name="password" formControlName="password" minlength="8" maxlength="20">
+    <errors [control]="validateForm.controls.password"></errors>
+  </div>
+  <div>
+    <label>Confirm Password</label>
+    <input type="password" name="confirmPassword" formControlName="confirmPassword" minlength="8" maxlength="20">
+    <errors [control]="validateForm.controls.confirmPassword"></errors>
+  </div>
+
+  <div formGroupName="address">
+    <h3>Address</h3>
+    <div>
+      <label>Country</label>
+      <input type="text" name="country" formControlName="country">
+      <errors [control]="validateForm.controls.address.controls.country"></errors>
+    </div>
+    <div>
+      <label>City</label>
+      <input type="text" name="city" formControlName="city" >
+      <errors [control]="validateForm.controls.address.controls.city"></errors>
+    </div>
+  </div>
+  <div formGroupName="planDetails">
+    <h3>Plan</h3>
+    <div>
+      <label>Plan Name</label>
+      <input type="text" name="plan" formControlName="plan">
+      <errors [control]="validateForm.controls.planDetails.controls.plan"></errors>
+    </div>
+    <div>
+      <label>Description</label>
+      <input type="text" name="description" formControlName="description" >
+      <errors [control]="validateForm.controls.planDetails.controls.description"></errors>
+    </div>
+  </div>
+
+  <errors [control]="validateForm"></errors>
+
+  <pre>{{validateForm.value | json}}</pre>
+  <button type="submit" [disabled]="validateForm.invalid">Submit</button>
+</form>
